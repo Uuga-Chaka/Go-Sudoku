@@ -33,6 +33,7 @@ func main() {
 
 	v1Router.Get("/healthz", handleReadiness)
 	v1Router.Get("/err", handleErr)
+	v1Router.Get("/sudoku", handleCreateSudoku)
 
 	router.Mount("/v1", v1Router)
 
