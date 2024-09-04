@@ -34,6 +34,9 @@ func main() {
 	v1Router.Get("/healthz", handleReadiness)
 	v1Router.Get("/err", handleErr)
 	v1Router.Get("/sudoku", handleCreateSudoku)
+	v1Router.Get("/sudoku/{difficulty}", handleCreateSudoku)
+	v1Router.Get("/difficulties", handleDifficulties)
+	v1Router.Post("/validate", handleValidateSudoku)
 
 	router.Mount("/v1", v1Router)
 
@@ -41,7 +44,9 @@ func main() {
 		Handler: router,
 		Addr:    ":" + portString,
 	}
+
 	log.Printf("Server starting on port: %v", portString)
+
 	err := srv.ListenAndServe()
 	if err != nil {
 		log.Fatal(err)
